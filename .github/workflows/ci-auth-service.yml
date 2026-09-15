@@ -26,7 +26,7 @@ permissions:
 env:
   AWS_REGION: ap-southeast-1
   ECR_REPOSITORY: auth-service
-  GITOPS_REPO: ${{ vars.GITOPS_REPO }}
+  GITOPS_REPO: NgocVinh00509/zenpharma-gitops
 
 jobs:
 
@@ -52,7 +52,7 @@ jobs:
       - name: Checkout GitOps repo
         uses: actions/checkout@v5
         with:
-          repository: NgocVinh00509/zenpharma-gitops
+          repository: ${{ env.GITOPS_REPO }}
           token: ${{ secrets.GITOPS_TOKEN }}
           path: _gitops
 

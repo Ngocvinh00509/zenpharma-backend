@@ -151,13 +151,13 @@ Set in **Settings → Secrets and variables → Actions**:
 | Secret | Description |
 |---|---|
 | `AWS_ACCOUNT_ID` | 12-digit AWS account ID |
-| `GITOPS_TOKEN` | GitHub PAT with `contents: write` on `your-github-username/zen-gitops` |
+| `GITOPS_TOKEN` | GitHub PAT with write access to `NgocVinh00509/zenpharma-gitops` (fine-grained: repository access to this repo, `Contents: Read and write`) |
 | `SEMGREP_APP_TOKEN` | Semgrep Cloud token (optional) |
 | `NVD_API_KEY` | NIST NVD API key for OWASP Dep Check (optional, faster) |
 
 | Variable | Value |
 |---|---|
-| `GITOPS_REPO` | `your-github-username/zen-gitops` |
+| `GITOPS_REPO` | `NgocVinh00509/zenpharma-gitops` |
 
 ---
 

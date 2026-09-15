@@ -1,7 +1,7 @@
 name: Promote to QA
 
 # Triggered manually — picks up the image currently running in DEV and opens
-# a PR in the GitOps repo (vars.GITOPS_REPO) to promote it to QA.
+# a PR in the GitOps repo (GITOPS_REPO) to promote it to QA.
 # QA ArgoCD app auto-syncs after merge.
 
 on:
@@ -26,7 +26,7 @@ permissions:
   contents: read
 
 env:
-  GITOPS_REPO: ${{ vars.GITOPS_REPO }}
+  GITOPS_REPO: NgocVinh00509/zenpharma-gitops
 
 jobs:
 
