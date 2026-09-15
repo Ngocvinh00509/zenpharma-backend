@@ -105,7 +105,7 @@ jobs:
       - name: "☕ Maven verify — compile, test, coverage (${{ inputs.service-name }})"
         run: |
           echo "::group::Maven Verify Output"
-          cd ${{ inputs.service-dir }} && mvn verify --no-transfer-progress
+          cd ${{ inputs.service-dir }} && mvn clean verify --no-transfer-progress
           echo "::endgroup::"
         env:
           SPRING_DATASOURCE_URL:      ${{ inputs.needs-database && 'jdbc:postgresql://localhost:5432/testdb' || '' }}
@@ -121,6 +121,9 @@ jobs:
           retention-days: 7
 
       # ── Code Quality & Security ──────────────────────────────────────────────
+      - name: Verify compiled Java classes for SonarCloud
+        run: test -d "${{ inputs.service-dir }}/target/classes"
+
       - name: "🔍 SonarCloud — SAST + code quality (${{ inputs.service-name }})"
         uses: SonarSource/sonarcloud-github-action@v3
         env:
@@ -166,7 +169,7 @@ jobs:
 
       # ── AWS & ECR ──────────────────────────────────────────────────────────────
       - name: "🔑 Configure AWS credentials (OIDC)"
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/pharma-dev-github-actions-role
           aws-region: ${{ inputs.aws-region }}

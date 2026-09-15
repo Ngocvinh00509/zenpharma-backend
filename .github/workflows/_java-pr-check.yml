@@ -68,7 +68,7 @@ jobs:
 
 
       - name: Maven verify (tests + JaCoCo coverage)
-        run: cd ${{ inputs.service-dir }} && mvn verify --no-transfer-progress
+        run: cd ${{ inputs.service-dir }} && mvn clean verify --no-transfer-progress
         env:
           SPRING_DATASOURCE_URL:      ${{ inputs.needs-database && 'jdbc:postgresql://localhost:5432/testdb' || '' }}
           SPRING_DATASOURCE_USERNAME: ${{ inputs.needs-database && 'testuser' || '' }}
@@ -81,6 +81,9 @@ jobs:
           name: coverage-${{ inputs.service-name }}
           path: ${{ inputs.service-dir }}/target/site/jacoco/
           retention-days: 3
+
+      - name: Verify compiled Java classes for SonarCloud
+        run: test -d "${{ inputs.service-dir }}/target/classes"
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v3
